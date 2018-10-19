@@ -1,0 +1,55 @@
+<head>
+    <link type="text/css" rel="stylesheet" href="http://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="http://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+    <!-- Add this after vue.js -->
+    <link type="text/css" rel="stylesheet" href="./styles/index.css"/>
+</head>
+<div id="app">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">{{ title }} </h1>
+            <p class="lead">{{ subtitle }}</p>
+        </div>
+    </div>
+    <div id="navigation">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="./github-api-example.html">GitHub</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./mongodb-sdk-example.html">MongoDB Javascript SDK</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="./mongodb-stitch-service-example.html">MongoDB Stitch Service</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.0.14/stitch.js"></script>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+<script src="http://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+<script>
+    const title = "MongoDB Stitch - Vue.JS Example";
+    const subtitle = "Welcome to this example application";
+    const client = stitch.Stitch.initializeDefaultAppClient('hacktoberfest2018-yxogw');
+    const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('hacktoberfest');
+    const app = new Vue({
+    el:'#app',
+    data: {
+        entries: [],
+        title: title,
+        subtitle: subtitle
+    },
+    created ()  {
+
+        fetch('http://api.github.com/search/repositories?q=topic:mongodb+topic:stitch+topic:hacktoberfest')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json.items);
+            this.entries = json.items;
+        })
+    }
+})
+</script>

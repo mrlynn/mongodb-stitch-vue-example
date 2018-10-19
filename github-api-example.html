@@ -1,0 +1,68 @@
+<head>
+    <link type="text/css" rel="stylesheet" href="http://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="http://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+    <!-- Add this after vue.js -->
+    <link type="text/css" rel="stylesheet" href="./styles/index.css"/>
+</head>
+<div id="app">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">MongoDB Hacktoberfest Entries</h1>
+            <p class="lead">Welcome to Hacktoberfest!</p>
+        </div>
+    </div>
+    <div id="navigation">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">GitHub</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./mongodb-sdk-example.html">MongoDB Javascript SDK</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="./mongodb-stitch-service-example.html">MongoDB Stitch Service</a>
+            </li>
+        </ul>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Entry</th>
+                <th>Repo</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody v-cloak>
+            <tr v-for="entry in entries">
+                <td scope="row">{{ entry.name }}</td>
+                <td> <a v-bind:href='entry.html_url'>{{ entry.html_url }}</a></td>
+                <td><img v-bind:alt='entry.owner.login' v-bind:src='entry.owner.avatar_url' width=100/></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.0.8/stitch.js"></script>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+<script src="http://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+<script>
+    const title = "MongoDB Stitch - Vue.JS Example"
+    const subtitle = "Pulling data from an API - not from MongoDB Stitch"
+    const client = stitch.Stitch.initializeDefaultAppClient('hacktoberfest2018-yxogw');
+    const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('hacktoberfest');
+    const app = new Vue({
+    el:'#app',
+    data: {
+        entries: []
+    },
+    created ()  {
+
+        fetch('http://api.github.com/search/repositories?q=topic:mongodb+topic:stitch+topic:hacktoberfest')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json.items);
+            this.entries = json.items;
+        })
+    }
+})
+</script>
