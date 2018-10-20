@@ -1,0 +1,11 @@
+{
+    "id": "5bb37e6d57c70d4e1936dc37",
+    "name": "getentries",
+    "run_as_user_id": "",
+    "run_as_user_id_script_source": "",
+    "options": {
+        "httpMethod": "GET",
+        "validationMethod": "NO_VALIDATION"
+    },
+    "respond_result": true
+}

@@ -1,0 +1,36 @@
+{
+    "id": "5bb3a05b3dcb8b9c589c95e2",
+    "database": "hacktoberfest",
+    "collection": "entries",
+    "roles": [
+        {
+            "name": "owner",
+            "apply_when": {
+                "userid": "%%user.id"
+            },
+            "read": true,
+            "write": true,
+            "insert": true,
+            "delete": true,
+            "additional_fields": {}
+        },
+        {
+            "name": "Anonymous",
+            "apply_when": {},
+            "read": true,
+            "insert": true,
+            "delete": true,
+            "additional_fields": {}
+        }
+    ],
+    "schema": {
+        "properties": {
+            "_id": {
+                "bsonType": "objectId"
+            },
+            "userid": {
+                "bsonType": "string"
+            }
+        }
+    }
+}

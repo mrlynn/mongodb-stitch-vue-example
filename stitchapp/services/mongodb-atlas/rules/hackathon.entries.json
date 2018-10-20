@@ -1,0 +1,22 @@
+{
+    "id": "5bb3820dfdc728943d7fd10c",
+    "database": "hackathon",
+    "collection": "entries",
+    "roles": [
+        {
+            "name": "default",
+            "apply_when": {},
+            "write": true,
+            "insert": true,
+            "delete": true,
+            "additional_fields": {}
+        }
+    ],
+    "schema": {
+        "properties": {
+            "_id": {
+                "bsonType": "objectId"
+            }
+        }
+    }
+}

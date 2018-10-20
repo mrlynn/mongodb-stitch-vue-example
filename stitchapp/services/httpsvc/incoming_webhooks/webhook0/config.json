@@ -1,0 +1,11 @@
+{
+    "id": "5bcb2c888c5feb9ceddd6b99",
+    "name": "webhook0",
+    "run_as_user_id": "",
+    "run_as_user_id_script_source": "",
+    "options": {
+        "httpMethod": "GET",
+        "validationMethod": "NO_VALIDATION"
+    },
+    "respond_result": false
+}
